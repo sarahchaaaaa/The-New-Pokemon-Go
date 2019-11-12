@@ -11,7 +11,7 @@ class _pokemon_database:
         url = self.SITE_URL + str(name) 
         r = requests.get(url)
         resp = json.loads(r.content)
-        return(resp['type']['name'])
+        return(resp['types'][0]['type']['name'])
 
 if __name__ == '__main__':     
     name = 'bulbasaur'
