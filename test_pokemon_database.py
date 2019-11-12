@@ -9,3 +9,6 @@ class TestPokemonDatabase:
     def test_get_type(self): 
         got_type = self.pdb.get_type(self.poke_name)
         self.assertEqual(got_type, self.poke_type)
+
+if __name__ == '__main__': 
+    unittest.main() 
