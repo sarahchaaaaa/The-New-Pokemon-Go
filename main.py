@@ -20,11 +20,9 @@ def start_service():
 
     #connect /movies/:movie_id resource
     dispatcher.connect('pokemon_get_type', '/pokemon/:name', controller=pokemonController, action='GET_TYPE', conditions=dict(method=['GET']))
-    # dispatcher.connect('movie_put', '/movies/:movie_id', controller=movieController, action='PUT_MID', conditions=dict(method=['PUT']))
-    # dispatcher.connect('movie_get', '/movies/', controller=movieController, action='GET', conditions=dict(method=['GET']))
-    # dispatcher.connect('movie_post', '/movies/', controller=movieController, action='POST', conditions=dict(method=['POST']))
-    # dispatcher.connect('movie_delete_mid', '/movies/:movie_id', controller=movieController, action='DELETE', conditions=dict(method=['DELETE']))
-    # dispatcher.connect('movie_delete_all', '/movies/', controller=movieController, action='DELETE_ALL', conditions=dict(method=['DELETE']))
+    dispatcher.connect('pokemon_get_all', '/pokemon', controller=pokemonController, action='GET', conditions=dict(method=['GET']))
+    dispatcher.connect('pokemon_get_weakness', '/weakness/:types', controller=pokemonController, action='GET_WEAKNESS', conditions=dict(method=['GET']))
+    dispatcher.connect('pokemon_get_strength', '/strength/:types', controller=pokemonController, action='GET_STRENGTH', conditions=dict(method=['GET']))
 
 
     conf = {

@@ -13,7 +13,28 @@ class PokemonController(object):
 
         self.pdb.load_pokemon('pokemon.json')
         self.pdb.load_pokemon_info('pokemon_info.json') #create this method
+        self.pdb.load_weakness_info('type_weakness.json')
+        self.pdb.load_strength_info('type_strength.json')
         #TODO load other resource files
+
+    def GET(self): #given 
+        output = {'result': 'success'}
+        entries = []
+        try:
+            for item in self.pdb.pokemon.keys():
+                get_all = {}
+                PID = item
+                get_all['id'] = PID     
+                print(item)
+                get_all['name'] = (self.pdb.pokemon[item]).capitalize()                   
+                entries.append(get_all)
+
+            output = {'pokemon':entries, 'result':'success'}
+        except Exception as ex:
+            output['result'] = 'error'
+            output['message'] = str(ex)
+            
+        return json.dumps(output)
 
     def GET_TYPE(self, name): #given 
         output = {'result' : 'success'}
@@ -31,80 +52,34 @@ class PokemonController(object):
 
         return json.dumps(output)
 
+    def GET_WEAKNESS(self, types): #given 
+        output = {'result' : 'success'}
+        try:
+            poke_weakness = self.pdb.get_weakness(types)
+            if poke_weakness is not None:
+                output['type'] = types
+                output['weakness'] = poke_weakness
+            else:
+                output['result'] = 'error'
+                output['message'] = 'pokemon not found'
+        except Exception as ex:
+            output['result'] = 'error'
+            output['message'] = str(ex)
 
-    # def get_poster_by_mid(self, mid):
-    #     if mid in self.mdb.posters.keys():
-    #         return self.mdb.posters[mid]
-    #     return '/default.jpg'
+        return json.dumps(output)
 
+    def GET_STRENGTH(self, types): #given 
+        output = {'result' : 'success'}
+        try:
+            poke_strength = self.pdb.get_strength(types)
+            if poke_strength is not None:
+                output['type'] = types
+                output['strength'] = poke_strength
+            else:
+                output['result'] = 'error'
+                output['message'] = 'pokemon not found'
+        except Exception as ex:
+            output['result'] = 'error'
+            output['message'] = str(ex)
 
-    # def PUT_MID(self, movie_id): #tried?
-    #     output = {'result' : 'success'}
-    #     movie_id = int(movie_id)
-
-    #     #extract msg from body
-    #     try:
-    #        data = cherrypy.request.body.read()
-    #        data = json.loads(data)
-    #        title = data['title']
-    #        genres = data['genres']
-    #        self.mdb.set_movie(movie_id, [title,genres])
-    #     except Exception as ex:
-    #         output['result'] = 'error'
-    #         output['message'] = str(ex)
-
-    #     return json.dumps(output)
-
-    # def GET(self): #tried?
-    #     output = {'result': 'success'}
-    #     entries = []
-    #     try:
-    #         for item in self.mdb.movies.keys():
-    #             get_all = {}
-    #             MID = item
-    #             get_all['id'] = MID       
-    #             get_all['title'] = self.mdb.movies[item][0]                
-    #             get_all['genres'] = self.mdb.movies[item][1]              
-    #             get_all['result'] = 'success'              
-    #             get_all['img'] = self.get_poster_by_mid(int(MID))              
-    #             entries.append(get_all)
-
-    #         output = {'movies':entries, 'result':'success'}
-    #     except Exception as ex:
-    #         output['result'] = 'error'
-    #         output['message'] = str(ex)
-            
-    #     return json.dumps(output)
-
-    # def POST(self): #tried? definitely come back
-    #     data = cherrypy.request.body.read()
-    #     data = json.loads(data)
-    #     allKeys = self.mdb.movies.keys()
-        
-    #     output = {'result': 'success'}
-    #     output['id'] = max(allKeys) + 1
-    #     d = {}
-    #     try:
-    #         movie_id = max(allKeys) + 1
-    #         title = data['title']
-    #         genres = data['genres']
-    #         self.mdb.set_movie(movie_id, [title,genres])
-    #     except Exception as ex:
-    #         output['result'] = 'error'
-    #         output['message'] = str(ex)
-    #     return json.dumps(output)
-        
-    # def DELETE(self, movie_id): #tried?
-    #     output = {'result':'success'}
-    #     try:
-    #         del self.mdb.movies[int(movie_id)]
-    #     except Exception as ex:
-    #         output['result'] = 'error'
-    #         output['message'] = str(ex)
-        
-    #     return json.dumps(output)
-
-    # def DELETE_ALL(self): #tried
-    #     self.mdb.movies.clear()
-    #     output = {'result':'success'}
-    #     return json.dumps(output)
+        return json.dumps(output)
