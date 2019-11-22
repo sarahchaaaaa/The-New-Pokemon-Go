@@ -1,3 +1,10 @@
+'''
+pokemon.py fully depends on the _pokemon_database for its query results
+
+the PokemonController initially loads all of the data (type, weaknesses, strengths, etc) from files
+once all of the data is loaded in, our server fully relies on the stored data to fill queries
+'''
+
 #movies.py
 import cherrypy
 import json

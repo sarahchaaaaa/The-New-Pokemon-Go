@@ -1,3 +1,8 @@
+'''
+makes requests to the pokeapi server to acquire different pokemon and type data
+loops through many types to fully fill out strengths and weaknesses dictionaries
+'''
+
 import json
 import requests
 

@@ -1,3 +1,15 @@
+'''
+all _pokemon_database dictionaries are loaded through data files kept on the same machine
+
+because what we are trying to do often requires lots of different data per user search, 
+we felt it was better to make all of the queries to the Pokemon Go API initially and store the data
+
+an example of the data requirements for a task would be: returning the types a pokemon is weak against;
+querying the Pokemon Go API for a pokemon's data only returns its name, type, and other information;
+data about types the pokemon is weak to is not returned in that query, 
+and would require more queries to the Pokemon Go API to return the proper result to the user
+'''
+
 import json
 class _pokemon_database:
 

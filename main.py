@@ -1,3 +1,18 @@
+'''
+we chose to scrape all of the data needed from the Pokemon Go API using scrape.py
+all of the scraped data is placed into local files that _pokemon_database loads
+this loaded data is used to fill any query to our server
+
+this design choice was made because many of the actions our group is trying to perform 
+are complicated and would require many requests to the Pokemon Go API calls
+for instance: finding the types a pokemon is weak to requires a pokemon response and a bunch of type responses
+
+where we found examples: 
+    - https://pokeapi.co/
+    - https://pokeapi.co/api/v2/pokemon/ditto/
+    - https://pokeapi.co/api/v2/type/3/
+'''
+
 import cherrypy
 
 # create pokemon.py
