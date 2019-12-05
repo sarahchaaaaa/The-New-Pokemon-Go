@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PokeList from './PokeList';
 import DetailView from './DetailView';
 import Pokemon from '../Pokemon';
-import './styles/App.css';
+import './styles/PokeApp.css';
 
 class PokeApp extends Component {
     constructor() {
@@ -27,7 +27,7 @@ class PokeApp extends Component {
   
     render() {
       return (
-        <div className="App">
+        <div className="PokeApp">
           <PokeList handleOnClick={this.handleOnClick} />
           <DetailView pokemon={this.state.pokemon} />
         </div>
