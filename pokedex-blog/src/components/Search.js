@@ -20,7 +20,7 @@ class Search extends Component{
   render() {  
   return (
 <div class="Search">
-    <input type="text" class="input" placeholder="What are you looking for?"/>
+    <input type="text" class="input" placeholder="Enter Pokemon.."/>
     <input type="button" value="search" class="close-btn"/>
 </div>
   )

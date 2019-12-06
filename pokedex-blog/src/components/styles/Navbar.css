@@ -30,14 +30,15 @@ body{
 }
 
 .input{
-  width: 400px;
+  caret-color: red;
+  width: 500px;
   border: 3px solid red;
   background: transparent;
   padding: 15px 30px;
   border-radius: 50px;
   outline: none;
   font-size: 18px;
-  color: #585858;
+  color: #fff;
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -57,13 +58,23 @@ body{
   cursor: pointer;
   color: #585858;
   background: red;
+  margin: -124px;
   border: 0px;
   width: 120px;
   height: 55px;
   border-radius: 50px;
-  outline: none;
+  outline: none; 
   text-transform: uppercase;
   font-weight: bold;
+  
 }
 
+.close-btn:hover{
+    background-color: rgba(255, 0, 0, 0.9)
+    
+}
 
+.close-btn:active{
+    background-color: rgba(255, 0, 0, 0.8)
+    
+}
