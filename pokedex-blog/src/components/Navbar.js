@@ -8,7 +8,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import './styles/Navbar.css';
 import ListItemText from '@material-ui/core/ListItemText';
-import './styles/Navbar.css'
 import {
     NavLink,
   } from "react-router-dom";
