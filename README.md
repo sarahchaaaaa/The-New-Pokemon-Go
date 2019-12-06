@@ -32,7 +32,7 @@ In the second, run the test file by entering:
 python3 test_ws.py
 ```
 
-##Part 3: Web Client:
+## Part 3: Web Client:
 ### What it does
 We created a website that runs on our server, and updated our server with CORS to accept API requests from our web client. 
 A user types in the search bar the name of a Pokemon, and the request returns the given Pokemon's type, types that would be strong
