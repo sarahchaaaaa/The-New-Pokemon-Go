@@ -4,6 +4,16 @@ body{
 .navlink{
     color: #585858 !important
 }
+a.active{
+    color: #585858 !important
+}
+a {
+    color: #585858 !important
+}
+.navlink:focus{
+    color: #585858 !important
+}
+
 
 .appbar{
     background-color: red
