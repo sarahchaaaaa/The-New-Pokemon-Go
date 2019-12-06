@@ -7,34 +7,24 @@ import TypoGraphy from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import {
+    NavLink,
+  } from "react-router-dom";
+
 const Navbar = () => {
     return(
         <div>
-        <AppBar position="static">
+        <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai&display=swap" rel="stylesheet"></link>
+        <AppBar position="static" style ={{backgroundColor: 'red'}}>
             <Toolbar>
-                Dashboard
+            <img src="https://img.icons8.com/plasticine/100/000000/pokeball.png"/>
                 <List component="nav">
                     <ListItem component="div">
                         <ListItem button>
-                            <ListItemText inset>
-                                <TypoGraphy color="inherit" variant="title">
-                                    Home
-                                </TypoGraphy>
-                            </ListItemText>
+                            <NavLink exact to="/" style={{ color: '#585858'}}><b>Pokedex</b></NavLink>  
                         </ListItem>
                         <ListItem button>
-                            <ListItemText inset>
-                                <TypoGraphy color="inherit" variant="title">
-                                    PokeDex
-                                </TypoGraphy>
-                            </ListItemText>
-                        </ListItem>
-                        <ListItem button>
-                            <ListItemText inset>
-                                <TypoGraphy color="inherit" variant="title">
-                                    Search
-                                </TypoGraphy>
-                            </ListItemText>
+                        <NavLink to="/search" style={{ color: '#585858'}}><b>Search</b></NavLink>
                         </ListItem>
                     </ListItem >
                 </List>
@@ -43,4 +33,5 @@ const Navbar = () => {
         </div>
     )
 }
+
 export default Navbar;
