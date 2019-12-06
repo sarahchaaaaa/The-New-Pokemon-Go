@@ -1,0 +1,74 @@
+body {
+    background: #E4000F;
+}
+
+input {
+    width: 200px;
+}
+
+.headerContainer {
+    height: 200px;
+    width: 40%;
+    text-align: center;
+    margin: auto auto;
+}
+
+.searchContainer {
+    height: 100px;
+    background-color: #595959;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: inset 0 0 10px 0.1px;
+}
+
+.container {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #E4000F;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #595959;
+    box-shadow: inset 0 0 10px 0.1px;
+}
+
+.titleDiv {
+    /*height: 20%;
+    width: 40%;*/
+    justify-content: center;
+    font-size: 150%;
+    font-weight: bold;
+    color: #ffffff;
+    top: 50%;
+    left: 50%;
+    background-color: #E4000F;
+    border: 4px solid #ffffff;
+    border-radius: 20px;
+}
+
+.weakDiv {
+    color: #ffffff;
+    width: 30%;
+    height: 90%;
+    padding: 5px;
+}
+
+.strongDiv {
+    color: #ffffff;
+    width: 30%;
+    height: 90%;
+    padding: 5px;
+}
+
+.typeDiv {
+    color: #ffffff;
+    width: 30%;
+    height: 90%;
+    padding: 5px;
+}
