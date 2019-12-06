@@ -19,7 +19,7 @@ python3 test_api.py
 Our server, found in the file main.py, uses the OO Library API **runs on port 51053**. 
 
 ### How to use: 
-This RESTful JSON & Server builds off of the OO Library API. It has a similar functionaliry 
+This RESTful JSON & Server builds off of the OO Library API. It has a similar functionality 
 
 ### Testing: 
 Multiple tests cases have been added to our test_ws.py file. To test you must have two terminals open. 
@@ -31,3 +31,40 @@ In the second, run the test file by entering:
 ```
 python3 test_ws.py
 ```
+
+##Part 3: Web Client:
+### What it does
+We created a website that runs on our server, and updated our server with CORS to accept API requests from our web client. 
+A user types in the search bar the name of a Pokemon, and the request returns the given Pokemon's type, types that would be strong
+against it, and types that would be weak against it. 
+
+### How to use:
+Run the server:
+```
+cd backend
+python3 main.py
+```
+Access the website:
+Go to 
+```
+student04.cse.nd.edu:/jybanez1/corncob/project
+```
+Type in the searchbar:
+```
+{your pokemon} 
+```
+example
+input:
+```
+squirtle
+```
+returns:
+```
+Type: water
+Weaknesses: electric, grass
+Strengths: rock, fire, ground
+```
+
+### Testing:
+We tested our web client by manually checking if the search results returned matched up the with expected results 
+from the website.
