@@ -1,3 +1,6 @@
+body{
+    background-color: #585858
+}
 .navlink{
     color: #585858 !important
 }
@@ -28,7 +31,7 @@
 
 .input{
   width: 400px;
-  border: 3px solid #585858;
+  border: 3px solid red;
   background: transparent;
   padding: 15px 30px;
   border-radius: 50px;
