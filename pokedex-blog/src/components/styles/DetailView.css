@@ -1,10 +1,12 @@
 .detail-view {
-  width: 50%;
-  height: 100%;
+  width: 40%;
+  height: 80%;
   padding: 10px;
+  margin-right: 20px;
   background-color: rgb(254, 0, 0);
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+  /*border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;*/
+  border-radius: 10px;
   box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.22);
   display: flex;
   flex-direction: column;
@@ -12,8 +14,8 @@
 }
 
 .sprite-image {
-  width: 100%;
-  height: 100%;
+  width: 350px;
+  height: 350px;
   margin: 10px auto;
   background-color: #585858;
   border: 15px solid #DEDEDE;
@@ -22,7 +24,7 @@
 }
 
 .data-wrapper {
-  width: 80%;
+  width: 350px;
   height: 110px;
   padding: 10px;
   margin: 0 auto;

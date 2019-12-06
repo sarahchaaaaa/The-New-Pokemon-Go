@@ -28,8 +28,8 @@ class PokeApp extends Component {
     render() {
       return (
         <div className="PokeApp">
+	  <DetailView pokemon={this.state.pokemon} />
           <PokeList handleOnClick={this.handleOnClick} />
-          <DetailView pokemon={this.state.pokemon} />
         </div>
       );
     }
