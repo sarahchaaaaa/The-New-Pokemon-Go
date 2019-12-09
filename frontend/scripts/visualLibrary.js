@@ -19,6 +19,14 @@ function Button() {
     }
 }
 
+function Image() {
+    this.createImage = function(id, source){
+        this.item = document.createElement("img"); 
+        this.item.setAttribute("id", id);
+        this.item.setAttribute("src", source); 
+    }
+}
+
 function Label() {
     this.createLabel = function(text, id) {
         this.item = document.createElement("label"); 

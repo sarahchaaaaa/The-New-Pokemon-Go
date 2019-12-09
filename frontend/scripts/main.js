@@ -4,11 +4,13 @@
 // CONSTANTS 
 PORT_NUM = 51053;
 BASE_URL = "http://student04.cse.nd.edu:" + PORT_NUM; 
+IMG_URL = "http://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
 
 // PROTOTYPES 
 Label.prototype = new Item(); 
 Button.prototype = new Item(); 
 Div.prototype = new Item(); 
+Image.prototype = new Item(); 
 SearchBar.prototype = new Item(); 
 
 // ELEMENTS TO DISPLAY ON PAGE
@@ -39,9 +41,12 @@ var search = new Button();
 search.createButton("search", "search");  
 search.addToDocument(); 
 
-
 var searchBar = new SearchBar(); 
 searchBar.createSB("searchBar", ""); 
+
+var sprite = new Image();
+var startImg = IMG_URL + "0.png";
+sprite.createImage("sprite", startImg); 
 
 // DIVS 
 var titleDiv = new Div();
@@ -67,6 +72,7 @@ typeDiv.add(type);
 var headerContainer = new Div();
 headerContainer.createDiv("headerContainer", "headerContainer");
 headerContainer.add(titleDiv);
+headerContainer.add(sprite);
 headerContainer.addToDocument();
 
 var searchContainer = new Div(); 
@@ -88,27 +94,37 @@ function parseInfo(){
     let input = document.getElementById('searchBar').value;
     pokeName = input.toLowerCase();
     var data = {}; 
-
+    
     var pokeType = JSON.parse(getPokeInfo(pokeName));   
+    var pokeID = JSON.parse(getPokeID(pokeName));   
+    for (i in pokeID['pokemon']){
+        if (pokeID['pokemon'][i]['name'] == pokeName){
+            var nextImgId = pokeID['pokemon'][i]['id'];
+        }
+    }
+
     data["type"] = pokeType["type"];
     var typeList = data["type"];
 
-    console.log(typeof typeList)
-    console.log(typeList.length);
-
+    
     if (typeof typeList == 'object'){
         var strong = JSON.parse(getStrong(data["type"][0])); 
         var weak = JSON.parse(getWeak(data["type"][0])); 
     }
-    else{
+    else if (typeof typeList == 'string'){
         var strong = JSON.parse(getStrong(data["type"])); 
+        console.log('here');
+        console.log(strong);
         var weak = JSON.parse(getWeak(data["type"])); 
     }
-
+    else{
+        var strong = 'Pokemon not found';
+        var weak = 'Pokemon not found';
+    }
+    
     data["weak"] = weak["weakness"];
     data["strong"] = strong["strength"]; 
-
-    console.log(data)
+    data["id"] = nextImgId;
     
     return data; 
 }
@@ -116,6 +132,15 @@ function parseInfo(){
 function getPokeInfo(name) {
     var req = new XMLHttpRequest(); 
     req.open("GET", BASE_URL + "/pokemon/" + name, false); 
+    req.onerror = function(e) { console.error(req.statusText); }
+    req.onload = function(e){ console.log(req.responseText); }
+    req.send(null); 
+    return req.responseText; 
+}
+
+function getPokeID(name) {
+    var req = new XMLHttpRequest(); 
+    req.open("GET", BASE_URL + "/pokemon", false); 
     req.onerror = function(e) { console.error(req.statusText); }
     req.onload = function(e){ console.log(req.responseText); }
     req.send(null); 
@@ -140,12 +165,19 @@ function getWeak(type) {
     return wreq.responseText; 
 }
 
+function getNextImg(newImage) {
+    var nextImg = document.getElementById("sprite"); 
+    nextImg.setAttribute("src", newImage); 
+}
+
 document.getElementById("search").onmouseup = function() {
     data = parseInfo(); 
     var ptype = data["type"]; 
-    console.log(ptype)
     var strong = data["strong"]; 
     var weak = data["weak"]; 
+    var nextID = data["id"];
+    var newLink = IMG_URL + nextID + '.png';
+    getNextImg(newLink); 
 
     strongTypes.setText(strong); 
     weakTypes.setText(weak); 
