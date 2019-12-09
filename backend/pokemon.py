@@ -18,7 +18,7 @@ class PokemonController(object):
         else:
             self.pdb = pdb
 
-        self.pdb.load_pokemon('pokemon.json')
+        self.pdb.load_pokemon('newPokemon.json')
         self.pdb.load_pokemon_info('pokemon_info.json') #create this method
         self.pdb.load_weakness_info('type_weakness.json')
         self.pdb.load_strength_info('type_strength.json')
@@ -31,12 +31,12 @@ class PokemonController(object):
             for item in self.pdb.pokemon.keys():
                 get_all = {}
                 PID = item
-                get_all['id'] = PID     
+                get_all['name'] = PID     
                 print(item)
-                get_all['name'] = (self.pdb.pokemon[item]).capitalize()                   
+                get_all['id'] = (self.pdb.pokemon[item])               
                 entries.append(get_all)
 
-            output = {'pokemon':entries, 'result':'success'}
+            output = {"pokemon": entries, 'result':'success'}
         except Exception as ex:
             output['result'] = 'error'
             output['message'] = str(ex)
