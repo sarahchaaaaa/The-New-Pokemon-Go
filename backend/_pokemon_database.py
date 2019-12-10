@@ -19,6 +19,7 @@ class _pokemon_database:
         self.pokemon_info = dict()
         self.pokemon_weakness = dict()
         self.pokemon_strength = dict()
+        self.types_of_pokemon = dict()
 
     def load_pokemon(self, pokemon_file):
         self.pokemon.clear()
@@ -43,7 +44,13 @@ class _pokemon_database:
         with open(pokemon_strength_file) as json_file:
             self.pokemon_strength = json.load(json_file)
         return self.pokemon_strength
-            
+        
+    def load_types_pokemon_info(self, types_of_pokemon_file):
+        self.types_of_pokemon.clear()
+        with open(types_of_pokemon_file) as json_file:
+            self.types_of_pokemon = json.load(json_file)
+        return self.types_of_pokemon
+
     def get_type(self, name): 
         if name in self.pokemon_info:
             return self.pokemon_info[name]
@@ -61,6 +68,11 @@ class _pokemon_database:
             return self.pokemon_strength[types]
         else:
             return
-
+            
+    def get_types_pokemon(self, ptype):
+        if ptype in self.types_of_pokemon:
+            return self.types_of_pokemon[ptype]
+        else:
+            return
 if __name__ == '__main__':     
     pdb = _pokemon_database()
