@@ -42,7 +42,7 @@ function SearchBar() {
     this.createSB = function(id, text) {
         this.item = document.createElement("input"); 
         this.item.setAttribute("id", id); 
-        this.item.setAttribute("placeholder", "Enter a Pokemon to Search?");
+        this.item.setAttribute("placeholder", "Enter a Pokemon to Search");
         this.item.setAttribute("value", text); 
         this.item.setAttribute("type", "text"); 
     }
