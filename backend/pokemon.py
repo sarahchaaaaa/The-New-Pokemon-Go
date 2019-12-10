@@ -22,6 +22,7 @@ class PokemonController(object):
         self.pdb.load_pokemon_info('pokemon_info.json') #create this method
         self.pdb.load_weakness_info('type_weakness.json')
         self.pdb.load_strength_info('type_strength.json')
+        self.pdb.load_types_pokemon_info('typeofPokemon.json')
         #TODO load other resource files
 
     def GET(self): #given 
@@ -85,6 +86,22 @@ class PokemonController(object):
             else:
                 output['result'] = 'error'
                 output['message'] = 'pokemon not found'
+        except Exception as ex:
+            output['result'] = 'error'
+            output['message'] = str(ex)
+
+        return json.dumps(output)
+
+    def GET_TYPES_POKEMON(self, ptype):
+        output = {'result' : 'success'}
+        try:
+            types_pokemon = self.pdb.get_types_pokemon(ptype)
+            if types_pokemon is not None:
+                output['type'] = ptype
+                output['pokemon with typing'] = types_pokemon
+            else:
+                output['result'] = 'error'
+                output['message'] = 'type not found'
         except Exception as ex:
             output['result'] = 'error'
             output['message'] = str(ex)
