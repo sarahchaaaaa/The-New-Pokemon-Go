@@ -21,15 +21,26 @@ from pokemon import PokemonController
 # copy your fully working python primer
 from _pokemon_database import _pokemon_database
 
+
+# Class for CORS correction of server 
+class OptionsController: 
+    def OPTIONS(self, *args, **kwargs):
+        return ""
+
+def CORS():
+    cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
+    cherrypy.response.headers["Access-Control-Allow-Methods"] = "GET, PUT, POST, DELETE, OPTIONS"
+    cherrypy.response.headers["Access-Control-Allow-Credentials"] = "true"
+
 def start_service():
     dispatcher = cherrypy.dispatch.RoutesDispatcher()
 
     # instantiate mdb so that it is shared with all controllers
-
     pdb_o = _pokemon_database()
 
     # instantiate controllers
     pokemonController = PokemonController(pdb=pdb_o)
+    optionsController = OptionsController() 
 
     #connecting endpoints
 
@@ -38,7 +49,15 @@ def start_service():
     dispatcher.connect('pokemon_get_all', '/pokemon', controller=pokemonController, action='GET', conditions=dict(method=['GET']))
     dispatcher.connect('pokemon_get_weakness', '/weakness/:types', controller=pokemonController, action='GET_WEAKNESS', conditions=dict(method=['GET']))
     dispatcher.connect('pokemon_get_strength', '/strength/:types', controller=pokemonController, action='GET_STRENGTH', conditions=dict(method=['GET']))
+    dispatcher.connect('pokemon_get_strength', '/strength/:types', controller=pokemonController, action='GET_STRENGTH', conditions=dict(method=['GET']))
+    dispatcher.connect('pokemon_get_type', '/type/:ptype', controller=pokemonController, action='GET_TYPES_POKEMON', conditions=dict(method=['GET']))
 
+    # CORS server 
+    dispatcher.connect('pokemon_get_type_options', '/pokemon/:name', controller=optionsController, action='OPTIONS', conditions=dict(method=['OPTIONS']))
+    dispatcher.connect('pokemon_get_all_options', '/pokemon', controller=optionsController, action='OPTIONS', conditions=dict(method=['OPTIONS']))
+    dispatcher.connect('pokemon_get_weakness_options', '/weakness/:types', controller=optionsController, action='OPTIONS', conditions=dict(method=['OPTIONS']))
+    dispatcher.connect('pokemon_get_strength_options', '/strength/:types', controller=optionsController, action='OPTIONS', conditions=dict(method=['OPTIONS']))
+    dispatcher.connect('pokemon_get_type', '/type/:ptype', controller=pokemonController, action='GET_TYPES_POKEMON', conditions=dict(method=['GET']))
 
     conf = {
         'global' : {
@@ -47,6 +66,7 @@ def start_service():
         },
         '/' : {
             'request.dispatch' : dispatcher,
+            'tools.CORS.on': True,
         }
     }
 
@@ -54,6 +74,6 @@ def start_service():
     app = cherrypy.tree.mount(None, config=conf)
     cherrypy.quickstart(app)
 
-
 if __name__ == '__main__':
+    cherrypy.tools.CORS = cherrypy.Tool('before_finalize', CORS)
     start_service()
