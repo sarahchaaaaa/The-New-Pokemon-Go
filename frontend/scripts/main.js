@@ -45,7 +45,7 @@ var searchBar = new SearchBar();
 searchBar.createSB("searchBar", ""); 
 
 var sprite = new Image();
-var startImg = IMG_URL + "0.png";
+var startImg = "https://img.icons8.com/plasticine/100/000000/pokeball.png";
 sprite.createImage("sprite", startImg); 
 
 var strongSprite = new Image();
