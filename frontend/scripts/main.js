@@ -5,7 +5,7 @@
 PORT_NUM = 51053;
 BASE_URL = "http://student04.cse.nd.edu:" + PORT_NUM; 
 IMG_URL = "http://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
-TYPE_URL = "http://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/"; 
+PATH_TO_TYPES = "type_sprites/";
 
 // PROTOTYPES 
 Label.prototype = new Item(); 
@@ -37,6 +37,12 @@ type.createLabel("", "TYPE");
 var typeLabel = new Label(); 
 typeLabel.createLabel("Type: ", "typeLabel");
 
+var primaryTypeLabel = new Label();
+primaryTypeLabel.createLabel("", "primaryTypeLabel");
+
+var primaryTypeType = new Label();
+primaryTypeType.createLabel("", "primaryTypeType");
+
 var search = new Button(); 
 search.createButton("search", "search");  
 search.addToDocument(); 
@@ -48,13 +54,21 @@ var sprite = new Image();
 var startImg = "https://img.icons8.com/plasticine/100/000000/pokeball.png";
 sprite.createImage("sprite", startImg); 
 
+var typeSprite = new Image();
+var typeSpriteImg = IMG_URL + "0.png";
+typeSprite.createImage("typeSprite", typeSpriteImg);
+
 var strongSprite = new Image();
 var strongStartImg = IMG_URL + "0.png";
 strongSprite.createImage("strongSprite", strongStartImg); 
 
 var weakSprite = new Image();
 var weakStartImg = IMG_URL + "0.png";
-weakSprite.createImage("weakSprite", weakStartImg); 
+weakSprite.createImage("weakSprite", weakStartImg);
+
+var typeSprite = new Image();
+var typeStartImg = IMG_URL + "0.png";
+typeSprite.createImage("typeSprite", typeStartImg);
 
 var weakAgainstLabel = new Label();
 weakAgainstLabel.createLabel("", "weakAgainstLabel");
@@ -74,6 +88,11 @@ var titleDiv = new Div();
 titleDiv.createDiv("titleDiv", "titleDiv");
 titleDiv.add(searchBar);
 titleDiv.add(title);
+
+var primaryType = new Div();
+primaryType.createDiv("primaryType", "primaryType");
+primaryType.add(primaryTypeLabel);
+primaryType.add(primaryTypeType);
 
 var weakAgainst = new Div();
 weakAgainst.createDiv("weakAgainst", "weakAgainst");
@@ -102,7 +121,9 @@ strongDiv.add(strongSprite);
 var typeDiv = new Div();
 typeDiv.createDiv("typeDiv", "typeDiv"); 
 typeDiv.add(typeLabel); 
-typeDiv.add(type); 
+typeDiv.add(type);
+typeDiv.add(primaryType);
+typeDiv.add(typeSprite);
 
 var headerContainer = new Div();
 headerContainer.createDiv("headerContainer", "headerContainer");
@@ -145,21 +166,24 @@ function parseInfo(){
     
     if (typeof typeList == 'object'){
         var strong = JSON.parse(getStrong(data["type"][0])); 
-        var weak = JSON.parse(getWeak(data["type"][0])); 
+        var weak = JSON.parse(getWeak(data["type"][0]));
+        data["primary type"] = data["type"][0]
     }
     else if (typeof typeList == 'string'){
         var strong = JSON.parse(getStrong(data["type"])); 
         var weak = JSON.parse(getWeak(data["type"])); 
+        data["primary type"] = data["type"]
     }
     else{
         var strong = 'Pokemon not found';
         var weak = 'Pokemon not found';
+        data["primary type"] = 'Pokemon not found';
     }
     
     data["weak"] = weak["weakness"];
     data["strong"] = strong["strength"]; 
     data["id"] = nextImgId;
-    
+
     return data; 
 }
 
@@ -168,7 +192,7 @@ function getPokeInfo(name) {
     req.open("GET", BASE_URL + "/pokemon/" + name, false); 
     req.onerror = function(e) { console.error(req.statusText); }
     // req.onload = function(e){ console.log(req.responseText); }
-    req.send(null); 
+    req.send(null);
     return req.responseText; 
 }
 
@@ -201,7 +225,7 @@ function getWeak(type) {
 
 function getPokemonwithType(type) {
     var preq = new XMLHttpRequest(); 
-    preq.open("GET", BASE_URL + "/types/" + type, false); 
+    preq.open("GET", BASE_URL + "/type/" + type, false); 
     preq.onerror = function(e) { console.error(wreq.statusText); }
     // preq.onload = function(e){ console.log(wreq.responseText); }
     preq.send(null); 
@@ -276,6 +300,10 @@ document.getElementById("search").onmouseup = function() {
     weakTypes.setText(weak); 
     type.setText(ptype); 
 
+    var primType = data["primary type"];
+    primaryTypeLabel.setText('PRIMARY TYPE: ');
+    primaryTypeType.setText(primType);
+
     randData = parseTypeInfo(data);
     var weakagainst = randData['weak type'];
     weakAgainstLabel.setText('WEAK AGAINST: ');
@@ -284,6 +312,10 @@ document.getElementById("search").onmouseup = function() {
     var strongagainst = randData['strong type'];
     strongAgainstLabel.setText('STRONG AGAINST: ');
     strongAgainstType.setText(strongagainst);
+
+    var primaryTypeString = data["primary type"];
+    var primaryLink = PATH_TO_TYPES + primaryTypeString + '.png';
+    getNextImg("typeSprite", primaryLink);
 
     pokeData = parsePokemonInfo(randData);
     var nextWeakID = pokeData['weakImg'];
