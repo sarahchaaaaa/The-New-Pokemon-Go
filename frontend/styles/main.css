@@ -2,10 +2,72 @@ body {
     background: #E4000F;
 }
 
-input {
-    width: 200px;
+#sprite {
+    height: 100px;
+    width: 100px;
+    padding-top: 15px;
+
 }
 
+
+.container label{
+    text-align: center;
+    text-transform: capitalize;
+}
+
+
+input{
+    caret-color: #585858;
+    width: 400px;
+  border: 3px solid #585858;
+  background: transparent;
+  padding: 15px 30px;
+  border-radius: 50px;
+  outline: none;
+  font-size: 18px;
+  color: #fff;
+  position: absolute;
+  }
+  
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #fff;
+    font-family: Roboto;
+    text-transform: uppercase;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color: #fff;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color: #fff;
+  }
+  
+  #search{
+  
+    position: relative;
+  
+  right: -171px;
+  cursor: pointer;
+  color: red;
+  background: #585858;
+  border: 0px;
+  width: 120px;
+  height: 55px;
+  border-radius: 50px;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: bold;
+    
+  }
+  
+  #search:hover{
+      background-color: rgba(58, 58, 58, 0.9)
+      
+  }
+  
+  #search:active{
+      background-color: rgba(58, 58, 58, 0.8)
+      
+  }
 .headerContainer {
     height: 200px;
     width: 40%;
@@ -15,7 +77,7 @@ input {
 
 .searchContainer {
     height: 100px;
-    background-color: #595959;
+    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,7 +85,7 @@ input {
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
-    box-shadow: inset 0 0 10px 0.1px;
+    
 }
 
 .container {
@@ -52,6 +114,19 @@ input {
     border-radius: 20px;
 }
 
+#pokeball{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+@-webkit-keyframes rotation {
+    from {
+            -webkit-transform: rotate(0deg);
+    }
+    to {
+            -webkit-transform: rotate(359deg);
+    }
+}
 .weakDiv {
     color: #ffffff;
     width: 30%;

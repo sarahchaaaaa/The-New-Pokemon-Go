@@ -39,11 +39,15 @@ description2.createLabel(" ", "description2");
 description2.addToDocument(); 
 
 var description = new Label(); 
-description.createLabel("The functionality of this API is to help a beginner at Pokemon with best and worst matchups. The user will be able to enter their Pokemon of choice, and our API will send requests to the PokeAPI from PokeAPI.co to return a Pokemon that is a good matchup and a Pokemon that is a poor matchup against the given Pokemon.", ""); 
+description.createLabel("The functionality of this API is to help a beginner at Pokemon with best and worst matchups. The user will be able to enter their Pokemon of choice, and our program will send requests to our API to return all of the type matchups of the given Pokemon and both a good and a poor matchup against it.", ""); 
 
 var sprite = new Image();
 var startImg = "https://img.icons8.com/plasticine/100/000000/pokeball.png";
-sprite.createImage("sprite", startImg); 
+sprite.createImage("sprite", startImg);
+
+var typeSprite = new Image();
+var typeStartImg = IMG_URL + "0.png";
+typeSprite.createImage("typeSprite", typeStartImg); 
 
 var strongSprite = new Image();
 var strongStartImg = IMG_URL + "0.png";
@@ -100,6 +104,7 @@ var typeDiv = new Div();
 typeDiv.createDiv("typeDiv", "typeDiv"); 
 typeDiv.add(typeLabel); 
 typeDiv.add(type); 
+typeDiv.add(typeSprite);
 
 var headerContainer = new Div();
 headerContainer.createDiv("headerContainer", "headerContainer");
@@ -112,16 +117,3 @@ infoContainer.createDiv("infoContainer", "infoContainer");
 infoContainer.add(description);
 infoContainer.add(description2);
 infoContainer.addToDocument(); 
-
-
-
-
-
-
-
-
-
-
-
-
-
